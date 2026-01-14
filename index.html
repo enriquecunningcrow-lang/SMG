@@ -73,15 +73,25 @@ body{
 }
 .balance{
     font-size:34px;
-    font-weight:800;
-    margin:8px 0 20px;
+    font-weight:600; /* أخف وزن من السابق */
+    margin-top:6px;
+}
+.balance span{
+    font-weight:600; /* USDT أخف وزن */
+    font-size:28px;
+}
+.pnl{
+    font-size:13px;
+    margin-top:6px;
+    color:#4cff9a;
+    font-weight:500;
 }
 
 /* ACTIONS */
 .actions{
     display:flex;
     justify-content:space-between;
-    margin-bottom:20px;
+    margin:20px 0;
 }
 .action{
     width:18%;
@@ -105,7 +115,7 @@ body{
     display:block;
 }
 
-/* PRICES */
+/* MARKET */
 .market{
     background:#111822;
     border-radius:20px;
@@ -139,7 +149,6 @@ body{
 .vip-box h2{
     text-align:center;
     color:#f5c542;
-    margin-bottom:10px;
 }
 .plan{
     border:1px solid #1a2230;
@@ -185,7 +194,8 @@ body{
 <div class="wallet" id="walletPage">
     <div class="wallet-card">
         <div class="wallet-title">Main Wallet</div>
-        <div class="balance">8,344,760 USDT</div>
+        <div class="balance">892,315 <span>USDT</span></div>
+        <div class="pnl">Today PNL: +0.79% (+0.00218 USDT)</div>
 
         <div class="actions">
             <div class="action" onclick="goVIP()">
@@ -237,7 +247,7 @@ body{
 
         <p><strong>Network:</strong> TRC20</p>
         <div class="wallet-address">
-            TEG1vP5M5etxp8iV6vhXME44mGvyxG9e8Z
+            TBYFfFTbwFrTDJNhK8FJ9kazD3CJfPYwGS
         </div>
     </div>
 </div>
