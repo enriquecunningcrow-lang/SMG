@@ -1,100 +1,270 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SMG Store - USDT</title>
+<title>Binance.com Wallet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body {
-    background:#0f0f0f;
-    color:#eee;
-    font-family: Tahoma, Arial;
-    max-width:800px;
-    margin:auto;
-    padding:20px;
-}
-h1, h2 {
-    color:#00ffa2;
-}
-.product {
-    border:1px solid #333;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:8px;
-}
-.price {
-    color:#ffd700;
-    font-weight:bold;
-}
-input, textarea, button {
-    width:100%;
-    padding:10px;
-    margin-top:8px;
-    background:#1a1a1a;
-    border:1px solid #444;
+body{
+    margin:0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background:#0b0f14;
     color:#fff;
 }
-button {
-    background:#00ffa2;
-    color:#000;
-    font-weight:bold;
+.container{
+    max-width:430px;
+    margin:auto;
+    padding:16px;
+}
+
+/* GLOBAL HEADER */
+.site-name{
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    color:#f5c542;
+    margin:10px 0 20px;
+}
+
+/* LOGIN */
+.login-box{
+    margin-top:60px;
+    background:#111822;
+    border-radius:18px;
+    padding:24px;
+}
+.login-box h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+.login-box input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border-radius:12px;
+    border:none;
+    background:#0b0f14;
+    color:#fff;
+}
+.login-box button{
+    width:100%;
+    padding:14px;
+    background:#f5c542;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
     cursor:pointer;
 }
-.notice {
-    background:#111;
-    padding:10px;
-    border-left:4px solid red;
-    margin-top:20px;
+
+/* WALLET */
+.wallet{
+    display:none;
 }
-.footer {
-    margin-top:30px;
+.wallet-card{
+    background:#111822;
+    border-radius:20px;
+    padding:20px;
+}
+.wallet-title{
+    font-size:13px;
+    opacity:.7;
+}
+.balance{
+    font-size:34px;
+    font-weight:800;
+    margin:8px 0 20px;
+}
+
+/* ACTIONS */
+.actions{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+.action{
+    width:18%;
+    text-align:center;
+    cursor:pointer;
+}
+.action-icon{
+    width:55px;
+    height:55px;
+    background:#1a2230;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin:auto;
+}
+.action span{
     font-size:12px;
-    color:#888;
+    margin-top:6px;
+    display:block;
+}
+
+/* PRICES */
+.market{
+    background:#111822;
+    border-radius:20px;
+    padding:15px;
+}
+.market h4{
+    margin:0 0 10px;
+    font-size:14px;
+    opacity:.8;
+}
+.coin{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #1a2230;
+    font-size:14px;
+}
+.coin:last-child{
+    border-bottom:none;
+}
+
+/* VIP */
+.vip{
+    display:none;
+}
+.vip-box{
+    background:#111822;
+    border-radius:20px;
+    padding:22px;
+}
+.vip-box h2{
+    text-align:center;
+    color:#f5c542;
+    margin-bottom:10px;
+}
+.plan{
+    border:1px solid #1a2230;
+    border-radius:12px;
+    padding:12px;
+    margin:10px 0;
+}
+.wallet-address{
+    background:#0b0f14;
+    padding:12px;
+    border-radius:12px;
+    font-size:13px;
+    word-break:break-all;
+}
+
+/* BACK */
+.back-btn{
+    background:#1a2230;
+    border:none;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:12px;
+    margin-bottom:12px;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
+<div class="container">
 
-<h1>🛒 SMG Store</h1>
-<p>متجر داخل شبكة Tor — الدفع فقط عبر USDT (TRC20)</p>
+<div class="site-name">Binance.com</div>
 
-<div class="product">
-<h2>منتج رقمي 1</h2>
-<p>FLASH USDT FOR 1WEEK</p>
-<p class="price">السعر: 50 USDT</p>
+<!-- LOGIN -->
+<div class="login-box" id="loginPage">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
 </div>
 
-<div class="product">
-<h2>منتج رقمي 2</h2>
-<p>FLASH USDT FOR 1MONTH</p>
-<p class="price">السعر: 200 USDT</p>
+<!-- WALLET -->
+<div class="wallet" id="walletPage">
+    <div class="wallet-card">
+        <div class="wallet-title">Main Wallet</div>
+        <div class="balance">8,344,760 USDT</div>
+
+        <div class="actions">
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">↑</div>
+                <span>Send</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">↓</div>
+                <span>Receive</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">💳</div>
+                <span>Buy</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">🏦</div>
+                <span>Sell</span>
+            </div>
+            <div class="action" onclick="goVIP()">
+                <div class="action-icon">🕘</div>
+                <span>History</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="market" style="margin-top:16px;">
+        <h4>Market Prices</h4>
+        <div class="coin"><span>BTC</span><span>$95,005</span></div>
+        <div class="coin"><span>ETH</span><span>$3,330</span></div>
+        <div class="coin"><span>BNB</span><span>$903.12</span></div>
+        <div class="coin"><span>SOL</span><span>$139.64</span></div>
+        <div class="coin"><span>XRP</span><span>$2.05</span></div>
+        <div class="coin"><span>USDT</span><span>$0.999</span></div>
+    </div>
 </div>
 
-<h2>💰 طريقة الدفع</h2>
-<p>أرسل المبلغ إلى عنوان USDT (TRC20) التالي:</p>
+<!-- VIP -->
+<div class="vip" id="vipPage">
+    <button class="back-btn" onclick="backToWallet()">← Back</button>
 
-<p><b>TBYFfFTbwFrTDJNhK8FJ9kazD3CJfPYwGS</b></p>
+    <div class="vip-box">
+        <h2>VIP Required</h2>
+        <p>You must subscribe to VIP before withdrawals.</p>
 
-<p>⚠️ أرسل على شبكة <b>TRC20 فقط</b></p>
+        <div class="plan">1 Week – <strong>200 USDT</strong></div>
+        <div class="plan">1 Month – <strong>600 USDT</strong></div>
+        <div class="plan">1 Year – <strong>5,000 USDT</strong></div>
+        <div class="plan">Lifetime – <strong>30,000 USDT</strong></div>
 
-<h2>📨 تأكيد الدفع</h2>
-<form>
-<input type="text" placeholder="Transaction ID (TxID)" required>
-<input type="text" placeholder="وسيلة التواصل (Telegram / Email)" required>
-<textarea placeholder="اسم المنتج أو ملاحظات"></textarea>
-<button type="submit">تم الدفع</button>
-</form>
-
-<div class="notice">
-❗️ تنبيه:  
-• الدفع نهائي ولا يوجد استرجاع  
-• أي تحويل على شبكة خاطئة لن يتم تعويضه  
-• المعالجة خلال 24 ساعة
+        <p><strong>Network:</strong> TRC20</p>
+        <div class="wallet-address">
+            TEG1vP5M5etxp8iV6vhXME44mGvyxG9e8Z
+        </div>
+    </div>
 </div>
 
-<div class="footer">
-SMG Store – Tor Network Only  
 </div>
+
+<script>
+function login(){
+    if(
+        email.value==="brad9900@gmail.com" &&
+        password.value==="brad9900life"
+    ){
+        loginPage.style.display="none";
+        walletPage.style.display="block";
+    }else{
+        alert("Invalid login");
+    }
+}
+function goVIP(){
+    walletPage.style.display="none";
+    vipPage.style.display="block";
+}
+function backToWallet(){
+    vipPage.style.display="none";
+    walletPage.style.display="block";
+}
+</script>
 
 </body>
 </html>
