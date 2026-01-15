@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع Kopara</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            background: #2d2d2d;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+        input {
+            padding: 12px;
+            width: 80%;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ff4d5a;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .hidden { display: none; }
+        .error { color: #ff4d5a; margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div id="step1" class="container">
+        <h2>مرحباً بك.. أدخل كلمة السر للدخول</h2>
+        <input type="password" id="pass1" placeholder="كلمة السر الأولى">
+        <br>
+        <button onclick="checkFirstPass()">دخول</button>
+        <p id="error1" class="error hidden">كلمة السر خاطئة!</p>
+    </div>
+
+    <div id="step2" class="container hidden">
+        <h2 style="line-height: 1.6;">مرحباً بك في موقع Kopara<br>يجب عليك الضغط على واحدة من الخيارات الآتية:</h2>
+        <div class="btn-group">
+            <button onclick="wrongChoice()">الخيار الأول</button>
+            <button onclick="wrongChoice()">الخيار الثاني</button>
+            <button onclick="showSecondPassInput()">الخيار الثالث</button>
+        </div>
+    </div>
+
+    <div id="step3" class="container hidden">
+        <h2>أدخل كلمة السر الخاصة بالخيار الثالث</h2>
+        <input type="password" id="pass2" placeholder="كلمة السر الثانية">
+        <br>
+        <button onclick="checkSecondPass()">تأكيد</button>
+        <p id="error2" class="error hidden">كلمة سر الخيار الثالث خاطئة!</p>
+    </div>
+
+    <div id="final-step" class="container hidden">
+        <h2 style="color: #4ade80;">أنت الآن داخل بحر من المعلومات التي تفضح الدول الشرقية الغربية</h2>
+        <p>اضغط التالي للتوضيح</p>
+        <br>
+        <button onclick="nextStep()" style="background-color: #2a9d8f;">التالي</button>
+    </div>
+
+    <script>
+        // التحقق من كلمة السر الأولى
+        function checkFirstPass() {
+            const p1 = document.getElementById('pass1').value;
+            if (p1 === "sujo2000") {
+                showStep('step2');
+            } else {
+                document.getElementById('error1').classList.remove('hidden');
+            }
+        }
+
+        // في حال اختار زر خاطئ (الأول أو الثاني)
+        function wrongChoice() {
+            alert("خطأ! سيتم إعادتك للبداية.");
+            location.reload(); // إعادة تحميل الصفحة للبداية
+        }
+
+        // إظهار واجهة كلمة السر الثانية
+        function showSecondPassInput() {
+            showStep('step3');
+        }
+
+        // التحقق من كلمة السر الثانية
+        function checkSecondPass() {
+            const p2 = document.getElementById('pass2').value;
+            if (p2 === "sujo238") {
+                showStep('final-step');
+            } else {
+                document.getElementById('error2').classList.remove('hidden');
+            }
+        }
+
+        // وظيفة التنقل بين الواجهات
+        function showStep(stepId) {
+            document.querySelectorAll('.container').forEach(div => div.classList.add('hidden'));
+            document.getElementById(stepId).classList.remove('hidden');
+        }
+
+        function nextStep() {
+            alert("بانتظار تعليماتك القادمة...");
+        }
+    </script>
+</body>
+</html>
